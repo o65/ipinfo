@@ -20,6 +20,7 @@ To use this program you will require [`python`](https://www.python.org/) 3.9 or 
 - Easy IP Info lookup
 - Simple UI
 - Input Validation
+- Cross-platform
 
 ### Installation
 ---
@@ -34,5 +35,5 @@ $ python3 main.py
 
 ### To-Do
 ---
-- optional output logging
-- add more features
+- Optional logging of output
+- More features
