@@ -3,6 +3,7 @@ def main():
     from time import sleep
     from os import name, system
     from re import match
+    import sys
 
     def ipinfo(): #define printing out ip info
         if len(r) == 1: #if length returned is 1
@@ -35,7 +36,7 @@ def main():
         elif a == "exit":
             print("Exiting...")
             sleep(1)
-            exit()
+            sys.exit()
         elif a == "myip":
             r = get("http://ip-api.com/json/?fields=140825").json() #requests with no input (defaults to your ip)
             ipinfo() #print ip info
