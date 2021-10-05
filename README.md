@@ -37,3 +37,7 @@ $ python3 main.py
 ---
 - Optional logging of output
 - More features
+
+### License
+---
+Licensed under the [MIT License](LICENSE)
