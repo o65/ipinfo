@@ -6,7 +6,7 @@ def main():
     import sys
 
     def ipinfo(local): #define printing out ip info
-        if len(r) == 1: #if length returned is 1
+        if len(request) == 1: #if length returned is 1
            print("Lookup failed.")
         else:
             if local:
@@ -14,13 +14,13 @@ def main():
             if not local:
                 print("Displaying ip info...")
             print("Success!\n")
-            print("IP: " + r["query"])
-            print("Country: " + r["country"])
-            print("Region: " + r["regionName"])
-            print("City: " + r["city"])
-            print("ISP: " + r["isp"])
-            print("Organization: " + r["org"])
-            print("VPN: " + str(r["proxy"]) + "\n") #prints proxy as a string to stop crashing
+            print("IP: " + request["query"])
+            print("Country: " + request["country"])
+            print("Region: " + request["regionName"])
+            print("City: " + request["city"])
+            print("ISP: " + request["isp"])
+            print("Organization: " + request["org"])
+            print("VPN: " + str(request["proxy"]) + "\n") #prints proxy as a string to stop crashing
 
     ipv4 = "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" #simple regex for an ipv4 address
     print('Type "help" for a list of commands')
@@ -40,12 +40,12 @@ def main():
             sleep(1)
             sys.exit()
         elif command == "myip":
-            r = get("http://ip-api.com/json/?fields=140825").json() #requests with no input (defaults to your ip)
+            request = get("http://ip-api.com/json/?fields=140825").json() #requests with no input (defaults to your ip)
             ipinfo(True) #print ip info
         elif not match(ipv4, command): #if ipv4 regex doesn't match input
             print("Error: Invalid IP")
         else:
-            r = get(f"http://ip-api.com/json/{command}?fields=140825").json() #requests with your input
+            request = get(f"http://ip-api.com/json/{command}?fields=140825").json() #requests with your input
             ipinfo(False) #print ip info
 
 if __name__ == '__main__':
