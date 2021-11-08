@@ -5,11 +5,14 @@ def main():
     from re import match
     import sys
 
-    def ipinfo(): #define printing out ip info
+    def ipinfo(local): #define printing out ip info
         if len(r) == 1: #if length returned is 1
            print("Lookup failed.")
         else:
-            print("Displaying your ip info...")
+            if local:
+                print("Displaying your ip info...")
+            if not local:
+                print("Displaying ip info...")
             print("Success!\n")
             print("IP: " + r["query"])
             print("Country: " + r["country"])
@@ -22,29 +25,28 @@ def main():
     ipv4 = "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" #simple regex for an ipv4 address
     print('Type "help" for a list of commands')
     while True:
-        a = input("IP Lookup: ")
-        if a == "help":
+        command = input("IP Lookup: ")
+        if command == "help":
             print('\n"exit" - Exit the application')
             print('"myip" - See your own ip info')
             print('"clear" - Clear the window\n')
-        elif a == "clear":
+        elif command == "clear":
             if name == "nt": #if on windows
                 system("cls")
             else: #if on anything but windows
                 system("clear")
-            print('Type "help" for a list of commands')
-        elif a == "exit":
+        elif command == "exit":
             print("Exiting...")
             sleep(1)
             sys.exit()
-        elif a == "myip":
+        elif command == "myip":
             r = get("http://ip-api.com/json/?fields=140825").json() #requests with no input (defaults to your ip)
-            ipinfo() #print ip info
-        elif not match(ipv4, a): #if ipv4 regex doesn't match input
+            ipinfo(True) #print ip info
+        elif not match(ipv4, command): #if ipv4 regex doesn't match input
             print("Error: Invalid IP")
         else:
-            r = get(f"http://ip-api.com/json/{a}?fields=140825").json() #requests with your input
-            ipinfo() #print ip info
+            r = get(f"http://ip-api.com/json/{command}?fields=140825").json() #requests with your input
+            ipinfo(False) #print ip info
 
 if __name__ == '__main__':
     main()
